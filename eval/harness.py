@@ -70,7 +70,13 @@ def evaluate_assert(spec: dict, reply, case: dict) -> tuple[bool, str]:
 def run(route: str = "primary", prompt_ref: str = "answer_service.v2",
         gateway_base: str | None = None, judge: bool = False) -> dict:
     settings = load_settings(gateway_base=gateway_base)
-    client = build_client(settings, route)
+    if route == "cascade":
+        from rafid.pipeline.cascade import CascadeClient
+
+        client = CascadeClient(build_client(settings, settings.cheap_route),
+                               build_client(settings, settings.primary_route))
+    else:
+        client = build_client(settings, route)
     guard_client = build_client(settings, settings.cheap_route)
 
     # THE REAL PIPELINE. Same constructor the demo uses.

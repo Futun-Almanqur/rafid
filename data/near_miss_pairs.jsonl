@@ -1,0 +1,16 @@
+{"id": "nm01", "a": "How much does an official academic transcript cost?", "b": "How much does a transcript express service cost?", "language": "en", "same_answer": false, "family": "service_variant"}
+{"id": "nm02", "a": "What is the fee for deferring a semester?", "b": "What is the fee for deferring a whole year?", "language": "en", "same_answer": false, "family": "scope_variant"}
+{"id": "nm03", "a": "What is the parking permit fee?", "b": "What is the parking fine fee?", "language": "en", "same_answer": false, "family": "opposite_meaning"}
+{"id": "nm04", "a": "How much is student housing per semester?", "b": "How much is student housing per year?", "language": "en", "same_answer": false, "family": "unit_variant"}
+{"id": "nm05", "a": "What is the fee for withdrawing from a course?", "b": "What is the fee for withdrawing from the university?", "language": "en", "same_answer": false, "family": "scope_variant"}
+{"id": "nm06", "a": "What does an enrolment letter cost?", "b": "What does an academic transcript cost?", "language": "en", "same_answer": false, "family": "different_service"}
+{"id": "nm07", "a": "What is the library fine per day?", "b": "What is the library membership fee?", "language": "en", "same_answer": false, "family": "different_service"}
+{"id": "nm08", "a": "What is the transfer application fee?", "b": "What is the transcript application fee?", "language": "en", "same_answer": false, "family": "near_homonym"}
+{"id": "nm09", "a": "كم رسوم إصدار السجل الأكاديمي؟", "b": "كم رسوم إصدار إفادة القيد؟", "language": "ar", "same_answer": false, "family": "different_service"}
+{"id": "nm10", "a": "كم رسوم تأجيل فصل دراسي؟", "b": "كم رسوم تأجيل سنة دراسية؟", "language": "ar", "same_answer": false, "family": "scope_variant"}
+{"id": "nm11", "a": "كم رسوم تصريح المواقف؟", "b": "كم رسوم مخالفة المواقف؟", "language": "ar", "same_answer": false, "family": "opposite_meaning"}
+{"id": "nm12", "a": "كم غرامة المكتبة لكل يوم؟", "b": "كم غرامة المكتبة لكل كتاب؟", "language": "ar", "same_answer": false, "family": "unit_variant"}
+{"id": "nm13", "a": "كم رسوم السكن لكل فصل؟", "b": "كم رسوم السكن لكل سنة؟", "language": "ar", "same_answer": false, "family": "unit_variant"}
+{"id": "nm14", "a": "كم رسوم الانسحاب من مقرر؟", "b": "كم رسوم الانسحاب من الجامعة؟", "language": "ar", "same_answer": false, "family": "scope_variant"}
+{"id": "nm15", "a": "How much does an official academic transcript cost?", "b": "What is the cost of an official academic transcript?", "language": "en", "same_answer": true, "family": "true_paraphrase"}
+{"id": "nm16", "a": "كم رسوم إصدار السجل الأكاديمي؟", "b": "ما هي رسوم إصدار السجل الأكاديمي؟", "language": "ar", "same_answer": true, "family": "true_paraphrase"}

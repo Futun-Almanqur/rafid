@@ -1,0 +1,200 @@
+{"id": "r001", "text": "كم رسوم سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r002", "text": "كم رسوم التقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r003", "text": "What documents do I need for replacing a lost student id card?", "language": "en", "intent": "service_info"}
+{"id": "r004", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r005", "text": "ما هي رسوم طلب التحويل بين الكليات؟", "language": "ar", "intent": "service_info"}
+{"id": "r006", "text": "What are the steps for setting up a tuition instalment plan?", "language": "en", "intent": "service_info"}
+{"id": "r007", "text": "ما هي خطوات إعداد خطة تقسيط الرسوم؟", "language": "ar", "intent": "service_info"}
+{"id": "r008", "text": "How much does registering for courses cost?", "language": "en", "intent": "service_info"}
+{"id": "r009", "text": "ما هي خطوات الانسحاب من مقرر؟", "language": "ar", "intent": "service_info"}
+{"id": "r010", "text": "كم رسوم التقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r011", "text": "How much does issuing an enrolment confirmation letter cost?", "language": "en", "intent": "service_info"}
+{"id": "r012", "text": "How much does setting up a tuition instalment plan cost?", "language": "en", "intent": "service_info"}
+{"id": "r013", "text": "ما هي خطوات إصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r014", "text": "كم يستغرق تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r015", "text": "What is the fee for deferring a semester?", "language": "en", "intent": "service_info"}
+{"id": "r016", "text": "ما هي خطوات سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r017", "text": "هل اكتمل طلبي WU-REQ-100046؟", "language": "ar", "intent": "my_request"}
+{"id": "r018", "text": "ما هي خطوات الانسحاب من مقرر؟", "language": "ar", "intent": "service_info"}
+{"id": "r019", "text": "What is the fee for registering for courses?", "language": "en", "intent": "service_info"}
+{"id": "r020", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r021", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r022", "text": "book me an advisor appointment at Main campus on 2026-10-05 morning, please confirm", "language": "en", "intent": "my_request"}
+{"id": "r023", "text": "ما هي خطوات سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r024", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r025", "text": "ما هي رسوم تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r026", "text": "كم يستغرق إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r027", "text": "ما المستندات المطلوبة لـإنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r028", "text": "كم يستغرق إعداد خطة تقسيط الرسوم؟", "language": "ar", "intent": "service_info"}
+{"id": "r029", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r030", "text": "What documents do I need for setting up a tuition instalment plan?", "language": "en", "intent": "service_info"}
+{"id": "r031", "text": "أريد التحدث إلى موظف بخصوص شكوى.", "language": "ar", "intent": "escalation"}
+{"id": "r032", "text": "How much does requesting an official academic transcript cost?", "language": "en", "intent": "service_info"}
+{"id": "r033", "text": "What documents do I need for settling a library fine?", "language": "en", "intent": "service_info"}
+{"id": "r034", "text": "How long does completing graduation clearance take?", "language": "en", "intent": "service_info"}
+{"id": "r035", "text": "What is the fee for requesting an official academic transcript?", "language": "en", "intent": "service_info"}
+{"id": "r036", "text": "What is the fee for applying to transfer between colleges?", "language": "en", "intent": "service_info"}
+{"id": "r037", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r038", "text": "ما هي رسوم تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r039", "text": "ما هي خطوات إصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r040", "text": "كم يستغرق إصدار بدل فاقد للبطاقة الجامعية؟", "language": "ar", "intent": "service_info"}
+{"id": "r041", "text": "What documents do I need for deferring a semester?", "language": "en", "intent": "service_info"}
+{"id": "r042", "text": "كم يستغرق إعداد خطة تقسيط الرسوم؟", "language": "ar", "intent": "service_info"}
+{"id": "r043", "text": "كم رسوم إعداد خطة تقسيط الرسوم؟", "language": "ar", "intent": "service_info"}
+{"id": "r044", "text": "ما المستندات المطلوبة لـإصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r045", "text": "ما هي رسوم طلب سجل أكاديمي رسمي؟", "language": "ar", "intent": "service_info"}
+{"id": "r046", "text": "What is the fee for applying to transfer between colleges?", "language": "en", "intent": "service_info"}
+{"id": "r047", "text": "ما المستندات المطلوبة لـإصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r048", "text": "ما هي خطوات سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r049", "text": "Has WU-REQ-100046 been completed?", "language": "en", "intent": "my_request"}
+{"id": "r050", "text": "ما المستندات المطلوبة لـإنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r051", "text": "ما هي خطوات إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r052", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r053", "text": "How much does withdrawing from a course cost?", "language": "en", "intent": "service_info"}
+{"id": "r054", "text": "كم رسوم إصدار بدل فاقد للبطاقة الجامعية؟", "language": "ar", "intent": "service_info"}
+{"id": "r055", "text": "How much does withdrawing from a course cost?", "language": "en", "intent": "service_info"}
+{"id": "r056", "text": "book me an advisor appointment at Main campus on 2026-10-05 morning, please confirm", "language": "en", "intent": "my_request"}
+{"id": "r057", "text": "What documents do I need for registering for courses?", "language": "en", "intent": "service_info"}
+{"id": "r058", "text": "ما هي رسوم إصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r059", "text": "What documents do I need for settling a library fine?", "language": "en", "intent": "service_info"}
+{"id": "r060", "text": "ما هي رسوم طلب التحويل بين الكليات؟", "language": "ar", "intent": "service_info"}
+{"id": "r061", "text": "ما هي خطوات تأجيل فصل دراسي؟", "language": "ar", "intent": "service_info"}
+{"id": "r062", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r063", "text": "احجز لي موعداً مع المرشد في الحرم الرئيسي بتاريخ 2026-10-06 صباحاً، أكد الحجز", "language": "ar", "intent": "my_request"}
+{"id": "r064", "text": "What is the fee for completing graduation clearance?", "language": "en", "intent": "service_info"}
+{"id": "r065", "text": "I want to speak to a person about a complaint.", "language": "en", "intent": "escalation"}
+{"id": "r066", "text": "كم رسوم إصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r067", "text": "ما هي خطوات إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r068", "text": "أريد التحدث إلى موظف بخصوص شكوى.", "language": "ar", "intent": "escalation"}
+{"id": "r069", "text": "How much does setting up a tuition instalment plan cost?", "language": "en", "intent": "service_info"}
+{"id": "r070", "text": "How long does completing graduation clearance take?", "language": "en", "intent": "service_info"}
+{"id": "r071", "text": "هل اكتمل طلبي WU-REQ-100046؟", "language": "ar", "intent": "my_request"}
+{"id": "r072", "text": "أريد التحدث إلى موظف بخصوص شكوى.", "language": "ar", "intent": "escalation"}
+{"id": "r073", "text": "ما هي خطوات سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r074", "text": "كم يستغرق إصدار بدل فاقد للبطاقة الجامعية؟", "language": "ar", "intent": "service_info"}
+{"id": "r075", "text": "What is the status of my request WU-REQ-100045?", "language": "en", "intent": "my_request"}
+{"id": "r076", "text": "ما هي خطوات إصدار بدل فاقد للبطاقة الجامعية؟", "language": "ar", "intent": "service_info"}
+{"id": "r077", "text": "كم رسوم إصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r078", "text": "Has WU-REQ-100046 been completed?", "language": "en", "intent": "my_request"}
+{"id": "r079", "text": "ما المستندات المطلوبة لـتأجيل فصل دراسي؟", "language": "ar", "intent": "service_info"}
+{"id": "r080", "text": "What documents do I need for deferring a semester?", "language": "en", "intent": "service_info"}
+{"id": "r081", "text": "What documents do I need for issuing an enrolment confirmation letter?", "language": "en", "intent": "service_info"}
+{"id": "r082", "text": "Has WU-REQ-100046 been completed?", "language": "en", "intent": "my_request"}
+{"id": "r083", "text": "احجز لي موعداً مع المرشد في الحرم الرئيسي بتاريخ 2026-10-06 صباحاً، أكد الحجز", "language": "ar", "intent": "my_request"}
+{"id": "r084", "text": "كم رسوم الانسحاب من مقرر؟", "language": "ar", "intent": "service_info"}
+{"id": "r085", "text": "What documents do I need for replacing a lost student id card?", "language": "en", "intent": "service_info"}
+{"id": "r086", "text": "Has WU-REQ-100046 been completed?", "language": "en", "intent": "my_request"}
+{"id": "r087", "text": "كم يستغرق إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r088", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r089", "text": "ما هي رسوم إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r090", "text": "How long does deferring a semester take?", "language": "en", "intent": "service_info"}
+{"id": "r091", "text": "ما هي خطوات التقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r092", "text": "What documents do I need for settling a library fine?", "language": "en", "intent": "service_info"}
+{"id": "r093", "text": "How long does deferring a semester take?", "language": "en", "intent": "service_info"}
+{"id": "r094", "text": "How long does withdrawing from a course take?", "language": "en", "intent": "service_info"}
+{"id": "r095", "text": "book me an advisor appointment at Main campus on 2026-10-05 morning, please confirm", "language": "en", "intent": "my_request"}
+{"id": "r096", "text": "Put me through to a human please.", "language": "en", "intent": "escalation"}
+{"id": "r097", "text": "ما المستندات المطلوبة لـإصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r098", "text": "What are the steps for deferring a semester?", "language": "en", "intent": "service_info"}
+{"id": "r099", "text": "What are the steps for registering for courses?", "language": "en", "intent": "service_info"}
+{"id": "r100", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r101", "text": "كم رسوم تأجيل فصل دراسي؟", "language": "ar", "intent": "service_info"}
+{"id": "r102", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r103", "text": "ما المستندات المطلوبة لـسداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r104", "text": "What are the steps for deferring a semester?", "language": "en", "intent": "service_info"}
+{"id": "r105", "text": "How long does settling a library fine take?", "language": "en", "intent": "service_info"}
+{"id": "r106", "text": "How much does requesting an official academic transcript cost?", "language": "en", "intent": "service_info"}
+{"id": "r107", "text": "How long does applying to transfer between colleges take?", "language": "en", "intent": "service_info"}
+{"id": "r108", "text": "كم رسوم إصدار بدل فاقد للبطاقة الجامعية؟", "language": "ar", "intent": "service_info"}
+{"id": "r109", "text": "كم رسوم سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r110", "text": "ما هي خطوات إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r111", "text": "How long does replacing a lost student id card take?", "language": "en", "intent": "service_info"}
+{"id": "r112", "text": "What is the fee for requesting an official academic transcript?", "language": "en", "intent": "service_info"}
+{"id": "r113", "text": "كم رسوم تأجيل فصل دراسي؟", "language": "ar", "intent": "service_info"}
+{"id": "r114", "text": "كم يستغرق تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r115", "text": "book me an advisor appointment at Main campus on 2026-10-05 morning, please confirm", "language": "en", "intent": "my_request"}
+{"id": "r116", "text": "ما المستندات المطلوبة لـطلب سجل أكاديمي رسمي؟", "language": "ar", "intent": "service_info"}
+{"id": "r117", "text": "How much does requesting an official academic transcript cost?", "language": "en", "intent": "service_info"}
+{"id": "r118", "text": "ما المستندات المطلوبة لـطلب التحويل بين الكليات؟", "language": "ar", "intent": "service_info"}
+{"id": "r119", "text": "ما المستندات المطلوبة لـسداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r120", "text": "ما هي خطوات إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r121", "text": "احجز لي موعداً مع المرشد في الحرم الرئيسي بتاريخ 2026-10-06 صباحاً، أكد الحجز", "language": "ar", "intent": "my_request"}
+{"id": "r122", "text": "What documents do I need for withdrawing from a course?", "language": "en", "intent": "service_info"}
+{"id": "r123", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r124", "text": "What is the status of my request WU-REQ-100045?", "language": "en", "intent": "my_request"}
+{"id": "r125", "text": "ما المستندات المطلوبة لـالتقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r126", "text": "ما المستندات المطلوبة لـإصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r127", "text": "Has WU-REQ-100046 been completed?", "language": "en", "intent": "my_request"}
+{"id": "r128", "text": "What is the fee for applying to transfer between colleges?", "language": "en", "intent": "service_info"}
+{"id": "r129", "text": "ما المستندات المطلوبة لـالتقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r130", "text": "كم يستغرق الانسحاب من مقرر؟", "language": "ar", "intent": "service_info"}
+{"id": "r131", "text": "How much does registering for courses cost?", "language": "en", "intent": "service_info"}
+{"id": "r132", "text": "ما المستندات المطلوبة لـإصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r133", "text": "أريد التحدث إلى موظف بخصوص شكوى.", "language": "ar", "intent": "escalation"}
+{"id": "r134", "text": "ما هي خطوات تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r135", "text": "كم رسوم إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r136", "text": "How much does completing graduation clearance cost?", "language": "en", "intent": "service_info"}
+{"id": "r137", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r138", "text": "كم رسوم طلب التحويل بين الكليات؟", "language": "ar", "intent": "service_info"}
+{"id": "r139", "text": "كم رسوم التقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r140", "text": "What is the fee for setting up a tuition instalment plan?", "language": "en", "intent": "service_info"}
+{"id": "r141", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r142", "text": "ما حالة طلبي WU-REQ-100045؟", "language": "ar", "intent": "my_request"}
+{"id": "r143", "text": "هل اكتمل طلبي WU-REQ-100046؟", "language": "ar", "intent": "my_request"}
+{"id": "r144", "text": "How much does replacing a lost student id card cost?", "language": "en", "intent": "service_info"}
+{"id": "r145", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r146", "text": "احجز لي موعداً مع المرشد في الحرم الرئيسي بتاريخ 2026-10-06 صباحاً، أكد الحجز", "language": "ar", "intent": "my_request"}
+{"id": "r147", "text": "What are the steps for setting up a tuition instalment plan?", "language": "en", "intent": "service_info"}
+{"id": "r148", "text": "How long does applying for student housing take?", "language": "en", "intent": "service_info"}
+{"id": "r149", "text": "What is the status of my request WU-REQ-100045?", "language": "en", "intent": "my_request"}
+{"id": "r150", "text": "How long does settling a library fine take?", "language": "en", "intent": "service_info"}
+{"id": "r151", "text": "ما هي رسوم تأجيل فصل دراسي؟", "language": "ar", "intent": "service_info"}
+{"id": "r152", "text": "Has WU-REQ-100046 been completed?", "language": "en", "intent": "my_request"}
+{"id": "r153", "text": "What documents do I need for obtaining a campus parking permit?", "language": "en", "intent": "service_info"}
+{"id": "r154", "text": "كم رسوم إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r155", "text": "What are the steps for registering for courses?", "language": "en", "intent": "service_info"}
+{"id": "r156", "text": "ما المستندات المطلوبة لـالتقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r157", "text": "How much does completing graduation clearance cost?", "language": "en", "intent": "service_info"}
+{"id": "r158", "text": "What documents do I need for setting up a tuition instalment plan?", "language": "en", "intent": "service_info"}
+{"id": "r159", "text": "What is the status of my request WU-REQ-100045?", "language": "en", "intent": "my_request"}
+{"id": "r160", "text": "هل اكتمل طلبي WU-REQ-100046؟", "language": "ar", "intent": "my_request"}
+{"id": "r161", "text": "احجز لي موعداً مع المرشد في الحرم الرئيسي بتاريخ 2026-10-06 صباحاً، أكد الحجز", "language": "ar", "intent": "my_request"}
+{"id": "r162", "text": "How long does registering for courses take?", "language": "en", "intent": "service_info"}
+{"id": "r163", "text": "ما هي رسوم إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r164", "text": "ما هي خطوات طلب سجل أكاديمي رسمي؟", "language": "ar", "intent": "service_info"}
+{"id": "r165", "text": "كم يستغرق إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r166", "text": "أريد التحدث إلى موظف بخصوص شكوى.", "language": "ar", "intent": "escalation"}
+{"id": "r167", "text": "Put me through to a human please.", "language": "en", "intent": "escalation"}
+{"id": "r168", "text": "Put me through to a human please.", "language": "en", "intent": "escalation"}
+{"id": "r169", "text": "ما هي خطوات إعداد خطة تقسيط الرسوم؟", "language": "ar", "intent": "service_info"}
+{"id": "r170", "text": "كم رسوم إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r171", "text": "ما هي رسوم إصدار إفادة قيد؟", "language": "ar", "intent": "service_info"}
+{"id": "r172", "text": "ما المستندات المطلوبة لـتسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r173", "text": "ما هي رسوم إصدار تصريح مواقف؟", "language": "ar", "intent": "service_info"}
+{"id": "r174", "text": "I want to speak to a person about a complaint.", "language": "en", "intent": "escalation"}
+{"id": "r175", "text": "What is the fee for setting up a tuition instalment plan?", "language": "en", "intent": "service_info"}
+{"id": "r176", "text": "كم يستغرق تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r177", "text": "هل اكتمل طلبي WU-REQ-100046؟", "language": "ar", "intent": "my_request"}
+{"id": "r178", "text": "هل اكتمل طلبي WU-REQ-100046؟", "language": "ar", "intent": "my_request"}
+{"id": "r179", "text": "What documents do I need for completing graduation clearance?", "language": "en", "intent": "service_info"}
+{"id": "r180", "text": "كم رسوم التقديم على السكن الجامعي؟", "language": "ar", "intent": "service_info"}
+{"id": "r181", "text": "كم يستغرق إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r182", "text": "ما هي رسوم تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r183", "text": "I want to speak to a person about a complaint.", "language": "en", "intent": "escalation"}
+{"id": "r184", "text": "What are the steps for replacing a lost student id card?", "language": "en", "intent": "service_info"}
+{"id": "r185", "text": "What is the fee for deferring a semester?", "language": "en", "intent": "service_info"}
+{"id": "r186", "text": "ما المستندات المطلوبة لـالانسحاب من مقرر؟", "language": "ar", "intent": "service_info"}
+{"id": "r187", "text": "What are the steps for requesting an official academic transcript?", "language": "en", "intent": "service_info"}
+{"id": "r188", "text": "كم رسوم تسجيل المقررات؟", "language": "ar", "intent": "service_info"}
+{"id": "r189", "text": "ما هي رسوم طلب التحويل بين الكليات؟", "language": "ar", "intent": "service_info"}
+{"id": "r190", "text": "ما هي رسوم سداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r191", "text": "كم يستغرق الانسحاب من مقرر؟", "language": "ar", "intent": "service_info"}
+{"id": "r192", "text": "How much does deferring a semester cost?", "language": "en", "intent": "service_info"}
+{"id": "r193", "text": "ما المستندات المطلوبة لـسداد غرامة المكتبة؟", "language": "ar", "intent": "service_info"}
+{"id": "r194", "text": "احجز لي موعداً مع المرشد في الحرم الرئيسي بتاريخ 2026-10-06 صباحاً، أكد الحجز", "language": "ar", "intent": "my_request"}
+{"id": "r195", "text": "ما هي رسوم طلب سجل أكاديمي رسمي؟", "language": "ar", "intent": "service_info"}
+{"id": "r196", "text": "What are the steps for requesting an official academic transcript?", "language": "en", "intent": "service_info"}
+{"id": "r197", "text": "حوّلني إلى شخص مسؤول من فضلك.", "language": "ar", "intent": "escalation"}
+{"id": "r198", "text": "كم يستغرق إنهاء إخلاء الطرف للتخرج؟", "language": "ar", "intent": "service_info"}
+{"id": "r199", "text": "What is the status of my request WU-REQ-100045?", "language": "en", "intent": "my_request"}
+{"id": "r200", "text": "How much does completing graduation clearance cost?", "language": "en", "intent": "service_info"}
