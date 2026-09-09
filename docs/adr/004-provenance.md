@@ -173,6 +173,14 @@ not threaten the zero-setup requirement. Two consequences are carried forward:
 1. **Phase 2 must confirm it** — the Colab setup cell is the first place the
    gateway starts over a real socket, and the download must be observed to
    succeed there. Until then, treat this as unproven on the target platform.
+
+   **Status after phase 2: STILL OPEN.** Not resolved, and not disproved — the
+   test has not been run. The phase-2 setup cell was written and now raises
+   rather than substituting an approximation, but it could not be executed:
+   the build sandbox has no access to Colab (`colab.research.google.com`
+   returns 000) and the BPE host is still denied there. The evidence that
+   closes this issue can only come from a Colab run, and the setup cell prints
+   `TOKENIZER=REAL` with the encoding name precisely so that run produces it.
 2. The phase-1 verification (`scripts/verify_gateway.py`) installs an approximate
    byte-level encoder **inside the script only** so the rest of the checks could
    run. The token counts in its captured output are therefore not tiktoken's.

@@ -1,0 +1,10 @@
+# Pinned for the classroom. No floating installs — a version that drifts between
+# the run that produced a number and the run that checks it makes both useless.
+#
+#   pip install -r gateway/requirements.txt -r requirements.lock
+#
+# This file grows as the phases add dependencies. Right now it carries only what
+# the setup cell and the service directory need; the model boundary (phase 3)
+# adds the rest.
+
+pyyaml==6.0.3
