@@ -1,0 +1,117 @@
+# Rafid configuration. Model names are configuration, not code.
+#
+# API KEYS ARE NEVER WRITTEN HERE. They arrive from the environment as
+#   RAFID_<ROUTE>_API_KEY   and   RAFID_<ROUTE>_BASE_URL
+# so this file is safe to commit and a provider swap is a YAML or env edit.
+#
+# Out of the box every route points at the local gateway (gateway/), which speaks
+# both wire dialects and needs no credentials. Point a route at a real provider by
+# setting its two environment variables; no code changes. That claim is the whole
+# argument for the model boundary, and tests/test_architecture.py fails if it
+# stops being true.
+
+primary_route: primary
+fallback_route: onprem
+cheap_route: cheap
+
+routes:
+  # --- commercial, cloud ---------------------------------------------------
+  primary:
+    dialect: openai
+    base_url: http://127.0.0.1:8080/v1
+    api_key: local-gateway-no-key
+    residency: cloud
+    kind: commercial
+    aliases:
+      rafid-default: course-flagship
+      rafid-flagship: course-flagship
+      rafid-small: course-small
+      rafid-extract: course-flagship
+      rafid-guard: course-small
+      rafid-router: course-small
+      rafid-judge: course-flagship
+
+  cheap:
+    dialect: openai
+    base_url: http://127.0.0.1:8080/v1
+    api_key: local-gateway-no-key
+    residency: cloud
+    kind: commercial
+    aliases:
+      rafid-default: course-small
+      rafid-flagship: course-small
+      rafid-small: course-small
+      rafid-extract: course-small
+      rafid-guard: course-small
+      rafid-router: course-small
+      rafid-judge: course-small
+
+  # --- the second wire dialect --------------------------------------------
+  comparison:
+    dialect: anthropic
+    base_url: http://127.0.0.1:8080
+    api_key: local-gateway-no-key
+    residency: cloud
+    kind: commercial
+    aliases:
+      rafid-default: course-anthropic
+      rafid-flagship: course-anthropic
+      rafid-small: course-anthropic
+      rafid-extract: course-anthropic
+      rafid-guard: course-anthropic
+      rafid-router: course-anthropic
+      rafid-judge: course-anthropic
+
+  # --- the OPEN-WEIGHT route ----------------------------------------------
+  # Same adapter, same code, different base_url. In a classroom this is
+  # `vllm serve` in front of an open-weight checkpoint; by default it is the
+  # local gateway serving that tier.
+  onprem:
+    dialect: openai
+    base_url: http://127.0.0.1:8080/v1
+    api_key: local-gateway-no-key
+    residency: on_premise
+    kind: open_weight
+    aliases:
+      rafid-default: wadi-onprem
+      rafid-flagship: wadi-onprem
+      rafid-small: wadi-onprem
+      rafid-extract: wadi-onprem
+      rafid-guard: wadi-onprem
+      rafid-router: wadi-onprem
+      rafid-judge: wadi-onprem
+
+# Illustrative rates, SAR per 1,000,000 tokens. Cached input is the Module 6
+# headline: it is where the prompt-cache saving actually lands.
+prices:
+  default:
+    input_per_mtok: 6.00
+    cached_input_per_mtok: 0.60
+    output_per_mtok: 18.00
+  course-flagship:
+    input_per_mtok: 6.00
+    cached_input_per_mtok: 0.60
+    output_per_mtok: 18.00
+  course-small:
+    input_per_mtok: 0.25
+    cached_input_per_mtok: 0.03
+    output_per_mtok: 0.90
+  course-anthropic:
+    input_per_mtok: 7.50
+    cached_input_per_mtok: 0.75
+    output_per_mtok: 22.50
+  wadi-onprem:
+    input_per_mtok: 1.90
+    cached_input_per_mtok: 1.90   # self-hosting has no provider prompt cache
+    output_per_mtok: 1.90
+
+# Self-hosting arithmetic for the break-even (phase 25).
+self_host:
+  gpu_sar_per_hour: 12.50
+  gpus: 1
+
+# Feature switches. Off by default so the "before" replay measures the
+# unoptimised system, which is what makes the "after" mean anything.
+cache_enabled: false
+semantic_cache_enabled: false
+routing_enabled: false

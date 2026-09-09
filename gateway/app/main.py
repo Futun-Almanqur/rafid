@@ -43,7 +43,35 @@ from app import brain
 
 app = FastAPI(title="SDA-AIE-213 course gateway (simulator)", version="1.0.0")
 
-ENC = tiktoken.get_encoding("o200k_base")
+#: The tokenizer, and whether it is the real one.
+#:
+#: tiktoken downloads its BPE table on first use. Where that download is blocked
+#: the gateway would otherwise refuse to start at all, which would take the whole
+#: application down with it. So it degrades — loudly, and visibly to every caller:
+#: ``GET /healthz`` reports ``tokenizer``, and any artefact quoting a token, cache
+#: or cost number must read that field and label the number accordingly.
+#:
+#: An approximate count is fine for exercising the accounting *path*. It is not
+#: evidence about token counts, and nothing in this project may present it as such.
+try:
+    ENC = tiktoken.get_encoding("o200k_base")
+    TOKENIZER = "REAL"
+except Exception:  # noqa: BLE001 - any failure here means no BPE table
+
+    class _ApproxEncoding:
+        """~4 UTF-8 bytes per token. Wrong, but wrong in a bounded, stated way."""
+
+        name = "approx-bytes/4"
+
+        def encode(self, text: str) -> list[int]:
+            n = len((text or "").encode("utf-8")) // 4
+            return list(range(max(1, n))) if text else []
+
+        def decode(self, ids: list[int]) -> str:
+            return "x" * len(ids)
+
+    ENC = _ApproxEncoding()
+    TOKENIZER = "APPROX"
 
 #: Wall-clock compression. 1.0 = the simulated latencies as written (roughly what a
 #: mid-sized hosted model feels like); the default keeps a 50-minute lab moving.
@@ -166,7 +194,7 @@ async def reset() -> dict:
 
 @app.get("/healthz")
 async def healthz() -> dict:
-    return {"ok": True, "models": KNOWN_MODELS, "speed": SPEED, "fast": FAST}
+    return {"ok": True, "models": KNOWN_MODELS, "speed": SPEED, "fast": FAST, "tokenizer": TOKENIZER}
 
 
 @app.get("/v1/models")
