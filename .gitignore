@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------------------
+# Secrets. Nothing in this block may ever reach a commit.
+# Capstone submission checklist: "No API key in the notebook or in git history."
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!configs/settings.example.env
+*.key
+*.pem
+secrets/
+**/credentials.json
+
+# ---------------------------------------------------------------------------
+# Generated files. Every artefact here is reproducible by a command in this
+# repository, so committing it would make the repository the source of truth
+# for numbers that should come from a run.
+# ---------------------------------------------------------------------------
+eval/out/*
+!eval/out/.gitkeep
+data/generated/
+*.log
+.cache/
+
+# The one deliberate exception: eval/baseline.json IS committed. Promoting a
+# baseline is a governed act (eval/promote_baseline.py) and the gate compares
+# against it, so its history is evidence.
+!eval/baseline.json
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------------------
+# Notebooks
+# ---------------------------------------------------------------------------
+.ipynb_checkpoints/
+# NOTE: notebook/capstone.ipynb IS committed WITH its outputs. The captured
+# output is the evidence the capstone is graded on ("captured as notebook
+# output, not narrated"), so stripping outputs would delete the submission.
+
+# ---------------------------------------------------------------------------
+# OS / editor
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
