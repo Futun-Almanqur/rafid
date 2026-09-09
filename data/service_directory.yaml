@@ -1,0 +1,264 @@
+# Wadi University (جامعة الوادي) — the service directory.
+#
+# This file is the ground truth for every grounded answer Rafid gives. If a fact
+# is not here, the assistant must refuse rather than guess, and the evaluation
+# harness asserts exactly that.
+#
+# Wadi University is FICTIONAL. Every service, fee, contact and identifier below
+# is invented for this capstone and describes no real institution.
+#
+# Identifier formats used across this project — all deliberately fictional:
+#   student      WU-STU-000123
+#   request      WU-REQ-123456
+#   appointment  WU-APT-000077
+#   email        WU-STU-000123@students.wadi.example
+#
+# Amounts are in SAR. Twelve entries, four service types, bilingual titles.
+
+registrar_contact: "Admissions & Registration (registrar@wadi.example)"
+registrar_contact_ar: "قبول وتسجيل (registrar@wadi.example)"
+
+campuses: [Main, North, Medical, Online]
+
+service_types: [records, enrolment, finance, campus_services]
+
+entries:
+  - id: transcript_request
+    service_type: records
+    title_en: Requesting an official academic transcript
+    title_ar: طلب سجل أكاديمي رسمي
+    fee: SAR 60 per copy
+    fee_ar: ٦٠ ريالاً لكل نسخة
+    processing_time: 3 working days
+    processing_time_ar: ٣ أيام عمل
+    documents: [Student ID card; A paid fee receipt]
+    documents_ar: [البطاقة الجامعية; إيصال سداد الرسوم]
+    steps:
+      - Open Student Services and choose Transcript Request
+      - Pay the issuing fee
+      - Collect from the registrar or select postal delivery
+    steps_ar:
+      - افتح خدمات الطلاب واختر طلب السجل الأكاديمي
+      - سدّد رسوم الإصدار
+      - استلم من التسجيل أو اختر الإرسال بالبريد
+    keywords: [transcript, academic record, official transcript, سجل أكاديمي, كشف درجات]
+
+  - id: enrolment_letter
+    service_type: records
+    title_en: Issuing an enrolment confirmation letter
+    title_ar: إصدار إفادة قيد
+    fee: No fee
+    fee_ar: بدون رسوم
+    processing_time: Same working day
+    processing_time_ar: خلال يوم العمل نفسه
+    documents: [Student ID card]
+    documents_ar: [البطاقة الجامعية]
+    steps:
+      - Open Student Services and choose Enrolment Letter
+      - Select the recipient body
+      - Download the stamped letter
+    steps_ar:
+      - افتح خدمات الطلاب واختر إفادة القيد
+      - حدد الجهة المستفيدة
+      - نزّل الإفادة المختومة
+    keywords: [enrolment letter, enrollment letter, proof of enrolment, إفادة قيد, تعريف طالب]
+
+  - id: graduation_clearance
+    service_type: records
+    title_en: Completing graduation clearance
+    title_ar: إنهاء إخلاء الطرف للتخرج
+    fee: No fee
+    fee_ar: بدون رسوم
+    processing_time: 10 working days
+    processing_time_ar: ١٠ أيام عمل
+    documents: [Library clearance; Housing clearance if resident; Settled financial account]
+    documents_ar: [إخلاء طرف المكتبة; إخلاء طرف السكن لطلاب السكن; تسوية الحساب المالي]
+    steps:
+      - Request clearance from Student Services
+      - Settle any outstanding library or housing items
+      - Collect the clearance certificate from the registrar
+    steps_ar:
+      - اطلب إخلاء الطرف من خدمات الطلاب
+      - سوِّ أي التزامات للمكتبة أو السكن
+      - استلم شهادة إخلاء الطرف من التسجيل
+    keywords: [graduation clearance, clearance, graduate, إخلاء طرف, تخرج]
+
+  - id: course_registration
+    service_type: enrolment
+    title_en: Registering for courses
+    title_ar: تسجيل المقررات
+    fee: No fee
+    fee_ar: بدون رسوم
+    processing_time: Immediate
+    processing_time_ar: فوري
+    documents: [Academic advisor approval for overload requests]
+    documents_ar: [موافقة المرشد الأكاديمي لطلبات التجاوز]
+    steps:
+      - Open the registration portal during your assigned slot
+      - Add courses within your approved credit limit
+      - Confirm the schedule before the slot closes
+    steps_ar:
+      - افتح بوابة التسجيل خلال الفترة المخصصة لك
+      - أضف المقررات ضمن الحد المعتمد للساعات
+      - أكّد الجدول قبل انتهاء الفترة
+    keywords: [course registration, register courses, add course, تسجيل مقررات, إضافة مقرر]
+
+  - id: course_withdrawal
+    service_type: enrolment
+    title_en: Withdrawing from a course
+    title_ar: الانسحاب من مقرر
+    fee: SAR 100 after the second week
+    fee_ar: ١٠٠ ريال بعد الأسبوع الثاني
+    processing_time: 2 working days
+    processing_time_ar: يوما عمل
+    documents: [Academic advisor approval]
+    documents_ar: [موافقة المرشد الأكاديمي]
+    steps:
+      - Request withdrawal in the registration portal
+      - Obtain your advisor's approval
+      - Check that the course shows a W grade on your record
+    steps_ar:
+      - قدّم طلب الانسحاب في بوابة التسجيل
+      - احصل على موافقة المرشد الأكاديمي
+      - تأكد من ظهور تقدير الانسحاب في سجلك
+    keywords: [course withdrawal, withdraw, drop a course, انسحاب من مقرر, حذف مقرر]
+
+  - id: semester_deferral
+    service_type: enrolment
+    title_en: Deferring a semester
+    title_ar: تأجيل فصل دراسي
+    fee: SAR 200 per semester deferred
+    fee_ar: ٢٠٠ ريال لكل فصل مؤجل
+    processing_time: 5 working days
+    processing_time_ar: ٥ أيام عمل
+    documents: [A written reason; Supporting documents if the reason is medical]
+    documents_ar: [مبرر مكتوب; مستندات مؤيدة إذا كان السبب طبياً]
+    steps:
+      - Submit a deferral request before the end of week four
+      - Await the college committee decision
+      - Pay the deferral fee once approved
+    steps_ar:
+      - قدّم طلب التأجيل قبل نهاية الأسبوع الرابع
+      - انتظر قرار لجنة الكلية
+      - سدّد رسوم التأجيل بعد الموافقة
+    keywords: [semester deferral, defer, postpone semester, تأجيل فصل, تأجيل الدراسة]
+
+  - id: transfer_application
+    service_type: enrolment
+    title_en: Applying to transfer between colleges
+    title_ar: طلب التحويل بين الكليات
+    fee: SAR 150
+    fee_ar: ١٥٠ ريالاً
+    processing_time: 15 working days
+    processing_time_ar: ١٥ يوم عمل
+    documents: [Current transcript; A statement of purpose]
+    documents_ar: [السجل الأكاديمي الحالي; خطاب الدوافع]
+    steps:
+      - Confirm you meet the receiving college's minimum GPA
+      - Submit the transfer request in Student Services
+      - Attend the receiving college interview if invited
+    steps_ar:
+      - تأكد من استيفاء الحد الأدنى للمعدل في الكلية المستقبِلة
+      - قدّم طلب التحويل في خدمات الطلاب
+      - احضر مقابلة الكلية المستقبِلة عند الدعوة
+    keywords: [transfer, change college, change major, تحويل, تغيير تخصص]
+
+  - id: tuition_instalment
+    service_type: finance
+    title_en: Setting up a tuition instalment plan
+    title_ar: إعداد خطة تقسيط الرسوم
+    fee: SAR 50 administrative charge
+    fee_ar: ٥٠ ريالاً رسوم إدارية
+    processing_time: 3 working days
+    processing_time_ar: ٣ أيام عمل
+    documents: [A completed instalment request form]
+    documents_ar: [نموذج طلب التقسيط معبأً]
+    steps:
+      - Apply through the Finance section of Student Services
+      - Choose a two, three or four instalment plan
+      - Pay the first instalment to activate the plan
+    steps_ar:
+      - قدّم الطلب عبر قسم الشؤون المالية في خدمات الطلاب
+      - اختر خطة على قسطين أو ثلاثة أو أربعة
+      - سدّد القسط الأول لتفعيل الخطة
+    keywords: [tuition instalment, installment plan, pay tuition, تقسيط الرسوم, خطة سداد]
+
+  - id: library_fine
+    service_type: finance
+    title_en: Settling a library fine
+    title_ar: سداد غرامة المكتبة
+    fee: SAR 5 per day per item
+    fee_ar: ٥ ريالات لكل يوم لكل مادة
+    processing_time: Immediate
+    processing_time_ar: فوري
+    documents: [Student ID card]
+    documents_ar: [البطاقة الجامعية]
+    steps:
+      - Check the outstanding amount in the library account
+      - Pay through the portal or at the library desk
+      - Confirm the item is cleared from your record
+    steps_ar:
+      - راجع المبلغ المستحق في حساب المكتبة
+      - سدّد عبر البوابة أو في مكتب المكتبة
+      - تأكد من رفع القيد عن سجلك
+    keywords: [library fine, overdue book, غرامة المكتبة, تأخير كتاب]
+
+  - id: id_card_replacement
+    service_type: campus_services
+    title_en: Replacing a lost student ID card
+    title_ar: إصدار بدل فاقد للبطاقة الجامعية
+    fee: SAR 40
+    fee_ar: ٤٠ ريالاً
+    processing_time: 2 working days
+    processing_time_ar: يوما عمل
+    documents: [A recent photograph]
+    documents_ar: [صورة شخصية حديثة]
+    steps:
+      - Report the loss in Student Services
+      - Pay the replacement fee
+      - Collect the new card from the campus service desk
+    steps_ar:
+      - أبلغ عن الفقدان في خدمات الطلاب
+      - سدّد رسوم البدل
+      - استلم البطاقة الجديدة من مكتب خدمات الحرم
+    keywords: [id card, student card, lost card, البطاقة الجامعية, بدل فاقد]
+
+  - id: parking_permit
+    service_type: campus_services
+    title_en: Obtaining a campus parking permit
+    title_ar: إصدار تصريح مواقف
+    fee: SAR 120 per academic year
+    fee_ar: ١٢٠ ريالاً للسنة الدراسية
+    processing_time: 5 working days
+    processing_time_ar: ٥ أيام عمل
+    documents: [Vehicle registration; A valid driving licence]
+    documents_ar: [استمارة المركبة; رخصة قيادة سارية]
+    steps:
+      - Apply in Student Services and select your campus
+      - Upload the vehicle documents
+      - Collect the permit sticker once approved
+    steps_ar:
+      - قدّم الطلب في خدمات الطلاب واختر الحرم الجامعي
+      - أرفق مستندات المركبة
+      - استلم ملصق التصريح بعد الموافقة
+    keywords: [parking permit, parking sticker, تصريح مواقف, ملصق مواقف]
+
+  - id: housing_application
+    service_type: campus_services
+    title_en: Applying for student housing
+    title_ar: التقديم على السكن الجامعي
+    fee: SAR 1500 per semester
+    fee_ar: ١٥٠٠ ريال لكل فصل دراسي
+    processing_time: 20 working days
+    processing_time_ar: ٢٠ يوم عمل
+    documents: [Enrolment confirmation letter; A completed housing form]
+    documents_ar: [إفادة القيد; نموذج السكن معبأً]
+    steps:
+      - Apply during the housing window before the semester starts
+      - Await the allocation result
+      - Pay the housing fee to confirm the place
+    steps_ar:
+      - قدّم خلال فترة التقديم قبل بداية الفصل
+      - انتظر نتيجة التخصيص
+      - سدّد رسوم السكن لتأكيد المقعد
+    keywords: [student housing, dormitory, accommodation, السكن الجامعي, سكن الطلاب]
