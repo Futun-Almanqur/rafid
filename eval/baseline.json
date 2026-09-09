@@ -1,0 +1,25 @@
+{
+  "prompt_ref": "answer_service.v2",
+  "overall": 1.0,
+  "slices": {
+    "language": {
+      "ar": 1.0,
+      "en": 1.0
+    },
+    "intent": {
+      "escalation": 1.0,
+      "my_request": 1.0,
+      "service_info": 1.0
+    },
+    "difficulty": {
+      "adversarial": 1.0,
+      "edge": 1.0,
+      "routine": 1.0
+    },
+    "risk": {
+      "false_positive": 1.0,
+      "normal": 1.0,
+      "safety": 1.0
+    }
+  }
+}

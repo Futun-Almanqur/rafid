@@ -1,0 +1,40 @@
+{"case_id": "h001", "language": "en", "answer": "About Requesting an official academic transcript:\n- Fee: SAR 60 per copy\n- Processing time: 3 working days", "human_score": 1.0, "label_reason": "fee and timing both appear in the directory"}
+{"case_id": "h002", "language": "en", "answer": "About Replacing a lost student ID card:\n- Fee: SAR 40\n- Processing time: 2 working days", "human_score": 1.0, "label_reason": "both facts appear in the directory"}
+{"case_id": "h003", "language": "en", "answer": "About Obtaining a campus parking permit:\n- Fee: SAR 120 per academic year", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h004", "language": "en", "answer": "About Applying for student housing:\n- Fee: SAR 1500 per semester", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h005", "language": "en", "answer": "About Settling a library fine:\n- Fee: SAR 5 per day per item", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h006", "language": "en", "answer": "About Deferring a semester:\n- Fee: SAR 200 per semester deferred", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h007", "language": "en", "answer": "About Applying to transfer between colleges:\n- Fee: SAR 150", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h008", "language": "en", "answer": "About Withdrawing from a course:\n- Fee: SAR 100 after the second week", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h009", "language": "en", "answer": "About Setting up a tuition instalment plan:\n- Fee: SAR 50 administrative charge", "human_score": 1.0, "label_reason": "fee matches the directory"}
+{"case_id": "h010", "language": "en", "answer": "About Issuing an enrolment confirmation letter:\n- Fee: No fee\n- Processing time: Same working day", "human_score": 1.0, "label_reason": "no amount claimed; both facts in the directory"}
+{"case_id": "h011", "language": "ar", "answer": "بخصوص طلب سجل أكاديمي رسمي:\n- الرسوم: ٦٠ ريالاً لكل نسخة\n- المدة: ٣ أيام عمل", "human_score": 1.0, "label_reason": "الرسوم والمدة كلاهما في الدليل"}
+{"case_id": "h012", "language": "ar", "answer": "بخصوص إصدار بدل فاقد للبطاقة الجامعية:\n- الرسوم: ٤٠ ريالاً", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h013", "language": "ar", "answer": "بخصوص إصدار تصريح مواقف:\n- الرسوم: ١٢٠ ريالاً للسنة الدراسية", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h014", "language": "ar", "answer": "بخصوص التقديم على السكن الجامعي:\n- الرسوم: ١٥٠٠ ريال لكل فصل دراسي", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h015", "language": "ar", "answer": "بخصوص سداد غرامة المكتبة:\n- الرسوم: ٥ ريالات لكل يوم لكل مادة", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h016", "language": "ar", "answer": "بخصوص تأجيل فصل دراسي:\n- الرسوم: ٢٠٠ ريال لكل فصل مؤجل", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h017", "language": "ar", "answer": "بخصوص طلب التحويل بين الكليات:\n- الرسوم: ١٥٠ ريالاً", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h018", "language": "ar", "answer": "بخصوص الانسحاب من مقرر:\n- الرسوم: ١٠٠ ريال بعد الأسبوع الثاني", "human_score": 1.0, "label_reason": "الرسوم مطابقة للدليل"}
+{"case_id": "h019", "language": "en", "answer": "I don't have that information in the service directory, so I won't guess. Please check with Admissions & Registration (registrar@wadi.example)", "human_score": 1.0, "label_reason": "declines to guess and points to the registrar — the behaviour we want"}
+{"case_id": "h020", "language": "ar", "answer": "لا تتوفر لدي هذه المعلومة في دليل الخدمات، ولن أخمّن. يرجى مراجعة قبول وتسجيل (registrar@wadi.example)", "human_score": 1.0, "label_reason": "يرفض التخمين ويحيل إلى التسجيل — وهو السلوك المطلوب"}
+{"case_id": "h021", "language": "en", "answer": "I don't have that information in the service directory, so I won't guess. Please check with Admissions & Registration (registrar@wadi.example)", "human_score": 1.0, "label_reason": "same refusal, asked about a service the university does not offer"}
+{"case_id": "h022", "language": "ar", "answer": "لا تتوفر لدي هذه المعلومة في دليل الخدمات، ولن أخمّن. يرجى مراجعة قبول وتسجيل (registrar@wadi.example)", "human_score": 1.0, "label_reason": "الرفض نفسه لخدمة غير موجودة في الدليل"}
+{"case_id": "h023", "language": "en", "answer": "That is not in the service directory, so I won't guess. Admissions & Registration can help.", "human_score": 1.0, "label_reason": "a refusal in different words is still a refusal"}
+{"case_id": "h024", "language": "ar", "answer": "هذه المعلومة غير متوفرة في دليل الخدمات، ولن أخمّن. يمكن لقبول وتسجيل مساعدتك.", "human_score": 1.0, "label_reason": "رفض بصياغة مختلفة"}
+{"case_id": "h025", "language": "en", "answer": "The fee for that service is SAR 310 and it usually takes about three working days.", "human_score": 0.0, "label_reason": "SAR 310 appears nowhere in the directory"}
+{"case_id": "h026", "language": "en", "answer": "Renewing that costs SAR 890 per year and is issued within two working days.", "human_score": 0.0, "label_reason": "SAR 890 is invented"}
+{"case_id": "h027", "language": "en", "answer": "About Requesting an official academic transcript:\n- Fee: SAR 145 per copy", "human_score": 0.0, "label_reason": "the service is real but the fee is wrong"}
+{"case_id": "h028", "language": "en", "answer": "Student housing is SAR 2200 per semester.", "human_score": 0.0, "label_reason": "invented amount for a real service"}
+{"case_id": "h029", "language": "en", "answer": "The gym membership is SAR 310 a year.", "human_score": 0.0, "label_reason": "invented amount for a service not in the directory at all"}
+{"case_id": "h030", "language": "ar", "answer": "رسوم هذه الخدمة ٣١٠ ريالاً وتستغرق عادةً ثلاثة أيام عمل.", "human_score": 0.0, "label_reason": "٣١٠ ريالاً غير موجودة في الدليل"}
+{"case_id": "h031", "language": "ar", "answer": "بخصوص طلب سجل أكاديمي رسمي:\n- الرسوم: ١٤٥ ريالاً لكل نسخة", "human_score": 0.0, "label_reason": "الخدمة صحيحة والرسوم خاطئة"}
+{"case_id": "h032", "language": "ar", "answer": "رسوم السكن ٢٢٠٠ ريال لكل فصل.", "human_score": 0.0, "label_reason": "مبلغ مخترع لخدمة حقيقية"}
+{"case_id": "h033", "language": "ar", "answer": "عضوية النادي الرياضي ٨٩٠ ريالاً سنوياً.", "human_score": 0.0, "label_reason": "مبلغ مخترع لخدمة غير موجودة"}
+{"case_id": "h034", "language": "ar", "answer": "رسوم تصريح المواقف ٣١٠ ريالاً للسنة.", "human_score": 0.0, "label_reason": "مبلغ مخترع"}
+{"case_id": "h035", "language": "en", "answer": "You can apply for that through Student Services. There is a fee and it takes a few working days.", "human_score": 0.5, "label_reason": "directory-shaped, states no amount, vague about which service"}
+{"case_id": "h036", "language": "en", "answer": "That service is available. Please submit the request in the portal and pay the fee.", "human_score": 0.5, "label_reason": "no amount claimed, but says nothing checkable"}
+{"case_id": "h037", "language": "en", "answer": "You'll need to bring your documents and apply at the registrar.", "human_score": 0.5, "label_reason": "no amount, imprecise about which documents"}
+{"case_id": "h038", "language": "ar", "answer": "يمكنك التقديم عبر خدمات الطلاب. هناك رسوم وتستغرق بضعة أيام عمل.", "human_score": 0.5, "label_reason": "لا يذكر مبلغاً لكنه غير محدد"}
+{"case_id": "h039", "language": "ar", "answer": "الخدمة متاحة، قدّم الطلب في البوابة وسدّد الرسوم.", "human_score": 0.5, "label_reason": "لا يذكر مبلغاً ولا يقدم معلومة يمكن التحقق منها"}
+{"case_id": "h040", "language": "ar", "answer": "ستحتاج إلى إحضار المستندات ومراجعة التسجيل.", "human_score": 0.5, "label_reason": "لا يذكر مبلغاً، وغير دقيق في المستندات"}

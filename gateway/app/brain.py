@@ -155,9 +155,20 @@ def detect_campus(text: str) -> str:
     return "unknown"
 
 
+#: The same Arabic orthographic fold the input guard applies before matching.
+#: Found during phase 14: the guard normalises "شكوى" to "شكوي" (ى -> ي) before
+#: anything downstream sees it, so an unfolded keyword list silently stops
+#: matching. Normalisation before matching only works if BOTH sides are folded.
+_AR_FOLD = str.maketrans({"أ": "ا", "إ": "ا", "آ": "ا", "ى": "ي", "ة": "ه", "ـ": ""})
+
+
+def _fold_ar(text: str) -> str:
+    return text.translate(_AR_FOLD)
+
+
 def _contains_any(text: str, words: list[str]) -> bool:
-    low = text.lower()
-    return any(w.lower() in low for w in words)
+    low = _fold_ar(text.lower())
+    return any(_fold_ar(w.lower()) in low for w in words)
 
 
 # --------------------------------------------------------------------------
