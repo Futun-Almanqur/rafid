@@ -587,18 +587,18 @@ def classify_guard(user_text: str, model: str) -> BrainResult:
     message = extract_tag(user_text, "student_message") or user_text
     low = message.lower()
     if _contains_any(message, CRISIS_WORDS):
-        category = "crisis"
+        category = "distress"
     elif any(h in low for h in INJECTION_HINTS):
-        category = "injection_attempt"
+        category = "injection"
     elif any(h in low for h in OFF_SCOPE_HINTS):
         category = "off_scope"
     else:
         category = "ok"
     # A small classifier is not a perfect classifier. Deterministic, and rare.
-    if tier_for(model).name in ("course-small", "wadi-onprem") and category == "injection_attempt":
+    if tier_for(model).name in ("course-small", "wadi-onprem") and category == "injection":
         if _roll(model, message, "guardmiss") < 0.06:
             category = "ok"
-    return BrainResult(text=json.dumps({"category": category}, ensure_ascii=False))
+    return BrainResult(text=category)
 
 
 # Action phrasing, not topic words. "How far ahead can I book an appointment?" is
@@ -606,38 +606,37 @@ def classify_guard(user_text: str, model: str) -> BrainResult:
 # is a request to act. A router that keys on the noun sends the first one to the
 # expensive handler and then wonders where the money went.
 SERVICE_INTENT_HINTS = [
+    # Wadi: the student's OWN request or appointment — the path that can act.
     "book me",
     "please book",
     "i want to book",
     "i would like to book",
-    "book an appointment in",
-    "book a civil records appointment",
-    "book a traffic services appointment",
+    "book an advisor appointment",
+    "book an appointment",
     "i need an appointment",
+    "advisor appointment",
     "cancel my",
     "reschedule",
-    "check my application",
     "status of my",
-    "status of application",
-    "my application",
-    "check application",
+    "my request",
+    "check my request",
+    "my appointment",
+    "my transcript request",
     "احجز",
     "أريد حجز",
     "احجز لي",
     "أكّد الحجز",
     "أكد الحجز",
-    "أؤكد الحجز",
     "أبغى موعد",
     "أحتاج موعد",
+    "موعد مع المرشد",
     "ألغِ",
     "ألغي موعد",
-    "حالة الطلب",
     "حالة طلبي",
     "طلبي رقم",
     "رقم الطلب",
-    "استعلم",
-    "الاستعلام عن طلب",
-    "وين وصل",
+    "الاستعلام عن طلبي",
+    "وين وصل طلبي",
 ]
 
 
@@ -646,12 +645,12 @@ def classify_route(user_text: str, model: str) -> BrainResult:
     if _contains_any(message, HUMAN_WORDS) or _contains_any(message, CRISIS_WORDS):
         intent = "escalate"
     elif _contains_any(message, SERVICE_INTENT_HINTS) or REFERENCE.search(message):
-        intent = "service"
+        intent = "my_request"
     else:
-        intent = "faq"
+        intent = "service_info"
     if tier_for(model).name == "wadi-onprem" and _roll(model, message, "misroute") < 0.05:
-        intent = "faq" if intent == "service" else "service"
-    return BrainResult(text=json.dumps({"intent": intent}, ensure_ascii=False))
+        intent = "service_info" if intent == "my_request" else "my_request"
+    return BrainResult(text=intent)
 
 
 CURRENCY = re.compile(r"(SAR\s*[\d,]+|[\d,]+\s*(?:ريال|ريالاً|رياﻻ))")
@@ -784,12 +783,12 @@ def decide_tools(messages: list[dict], tools: list[dict], model: str) -> BrainRe
             if language == "ar":
                 text = (
                     f"تم الحجز. رقم التأكيد {payload['confirmation']} "
-                    f"في {payload.get('city', '')} بتاريخ {payload.get('date', '')}."
+                    f"في الحرم {payload.get('campus', '')} بتاريخ {payload.get('date', '')}."
                 )
             else:
                 text = (
                     f"Booked. Your confirmation number is {payload['confirmation']} "
-                    f"in {payload.get('city', '')} on {payload.get('date', '')}."
+                    f"for the {payload.get('campus', '')} campus on {payload.get('date', '')}."
                 )
             return BrainResult(text=text)
         if "handed_off" in payload:
@@ -837,10 +836,8 @@ def decide_tools(messages: list[dict], tools: list[dict], model: str) -> BrainRe
         campus = detect_campus(message)
         confirmed = _contains_any(message, BOOK_CONFIRM_WORDS)
         if date and campus != "unknown" and confirmed:
-            service_type = _service_type(message, None)
-            if service_type == "other":
-                service_type = "enrolment"
-            args = {"service_type": service_type, "campus": campus, "date": date.group()}
+            slot = "morning" if "morning" in message.lower() or "صباح" in message else "afternoon"
+            args = {"campus": campus, "date": date.group(), "slot": slot}
             if _roll(model, message, "bookfumble") < tier.tool_fumble_rate:
                 args.pop("date")  # missing required argument
             return BrainResult(

@@ -264,7 +264,7 @@ def run_brain(
     # loops re-read the ORIGINAL input; this line is the whole difference.
     source_text = user_texts[0] if repairing and user_texts else user_text
 
-    if name == "service_ticket":
+    if name == "student_request":
         return brain.extract_ticket(system, source_text, model, repairing)
     if name == "guard_verdict":
         return brain.classify_guard(user_text, model)
