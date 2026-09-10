@@ -13,11 +13,11 @@ this document was typed by hand.
 | Claim class | Status |
 |---|---|
 | Pipeline behaviour, guards, gate, tool safety, slices | **LOCAL VERIFIED** — run in this repository |
-| Token counts, cache ratios, cost figures | **COLAB VERIFICATION PENDING** — see below |
+| Token counts, cache ratios, cost figures | **COLAB COST REPLAY PENDING** — see below |
 | Colab zero-setup reproducibility | **COLAB VERIFIED** — clean Google Colab runtime completed Run all successfully; the executed notebook with captured outputs is committed as `Phase 2: clean Colab run` |
 | Real-provider evidence | **NOT USED** — no provider key was used, by design |
 
-**COLAB VERIFICATION PENDING.** This run used the gateway's approximate byte-based token counter, because `tiktoken` could not download its BPE table in the build environment. Every token, cache-ratio and cost figure below therefore measures the accounting *path*, not real token counts. **COLAB COST REPLAY PENDING.** The original benchmark run used the gateway's approximate byte-based token counter because `tiktoken` could not download its BPE table in the build environment. A clean Google Colab run has now confirmed that the real `tiktoken` tokenizer loads successfully (`TOKENIZER=REAL`), but the benchmark and cost replay has not yet been re-executed with that tokenizer. Therefore, the token counts, cache ratios, and cost figures below still describe the accounting path rather than real-token measurements.
+**COLAB COST REPLAY PENDING.** The original benchmark run used the gateway's approximate byte-based token counter because `tiktoken` could not download its BPE table in the build environment. A clean Google Colab run has now confirmed that the real `tiktoken` tokenizer loads successfully (`TOKENIZER=REAL`), but the benchmark and cost replay has not yet been re-executed with that tokenizer. Therefore, the token counts, cache ratios, and cost figures below still describe the accounting path rather than real-token measurements.
 
 ---
 
