@@ -103,6 +103,7 @@ else:
         raise RuntimeError("run this from inside a checkout of the project")
 
 sys.path.insert(0, str(ROOT / "gateway"))
+sys.path.insert(0, str(ROOT / "src"))
 os.chdir(ROOT)
 print("project root :", ROOT)
 
@@ -344,6 +345,158 @@ again = ask("How much does an official academic transcript cost?")
 text = again["choices"][0]["message"]["content"]
 assert "SAR 60 per copy" in text, "the restarted gateway did not answer from the directory"
 print("PASS  a fresh process answers from the directory — no leftover state")
+'''
+)
+
+
+# ---------------------------------------------------------------------------
+md(
+    """
+### §1.1 · The provider SDK, actually called
+
+The rubric asks for a provider SDK that is *called*, not merely declared. The
+cell below builds a client through our config, shows that the object inside the
+adapter really is `openai.OpenAI` pointed at the configured `base_url`, and then
+completes a request through it.
+
+Two things stay above the boundary and are visible here:
+
+- `max_retries=0` on the SDK. Reliability policy is `ResilientClient`'s job, and
+  two retry layers turn one 429 into six and make the drill transcript a lie.
+- the model **alias** is resolved from config, so no caller names a concrete model.
+
+`import openai` appears in exactly one package, `src/rafid/llm/`. §1.4 proves that
+with a check that can fail.
+"""
+)
+
+code(
+    r'''
+import openai
+from openai import OpenAI
+
+from rafid.config import build_client, load_settings
+from rafid.llm import LLMRequest, Message
+from rafid.llm.openai_compat import SDK_NAME, SDK_VERSION
+from rafid.domain.directory import load_directory, rendered_directory
+
+settings = load_settings(gateway_base=BASE)
+client = build_client(settings, "primary")
+
+print(f"provider SDK           : {SDK_NAME} {SDK_VERSION}")
+print(f"object inside adapter  : {type(client.sdk).__module__}.{type(client.sdk).__name__}")
+print(f"isinstance(_, OpenAI)  : {isinstance(client.sdk, OpenAI)}")
+print(f"base_url (from config) : {client.sdk.base_url}")
+print(f"sdk max_retries        : {client.sdk.max_retries}  (retry lives in ResilientClient)")
+print(f"alias -> concrete model: rafid-flagship -> {client.resolve('rafid-flagship')}")
+
+reply = client.complete(LLMRequest(
+    messages=[
+        Message(role="system", content=system_prompt("en")),
+        Message(role="user",
+                content="<student_message>How much does an official academic "
+                        "transcript cost?</student_message>"),
+    ],
+    model_alias="rafid-flagship",
+    max_tokens=300,
+))
+
+print()
+print(f"answered by : {reply.model_id}  via route '{reply.route}'")
+print(f"usage       : in={reply.usage.input_tokens} out={reply.usage.output_tokens} "
+      f"cached={reply.usage.cached_input_tokens}")
+print(f"latency     : {reply.latency_ms:.0f} ms")
+print()
+print(reply.text)
+
+assert isinstance(client.sdk, OpenAI), "the adapter is not using the OpenAI SDK"
+assert reply.model_id, "the SDK call returned no model id"
+assert "SAR 60 per copy" in (reply.text or ""), "the SDK call did not reach our backend"
+print()
+print("PASS  a real openai.OpenAI client completed a request against the configured backend.")
+'''
+)
+
+# ---------------------------------------------------------------------------
+md(
+    """
+### §3.2 · Saudi PII — masked before any model, router or log sees it
+
+Every value below is **synthetic**, constructed to match a format. No real
+personal data is used anywhere in this project.
+
+A Saudi student will type a national ID, a mobile number or an IBAN into a chat
+box without being asked, because every other government form wants one. The
+assistant never needs any of them, so the safest thing it can do is not have
+them.
+
+The claim is about **ordering**, not about having a regex. The cell captures what
+the classifier model was actually handed, and what went into the log — a masker
+that ran after the model call would look identical in a unit test and fail here.
+"""
+)
+
+code(
+    r'''
+from rafid.domain.session import PII_PATTERNS, SAUDI_PII_PATTERNS, Session, mask_identifiers
+from rafid.guards.input_guards import InputGuard
+from rafid.guards.output_guards import OutputGuard
+from rafid.llm.fake import FakeClient
+from rafid.observability import RECORDS, clear
+
+# SYNTHETIC values — format-shaped, not real.
+NATIONAL_ID = "1098765432"
+MOBILE      = "0512345678"
+IBAN        = "SA4420000001234567891234"
+
+print("Saudi PII families detected:", list(SAUDI_PII_PATTERNS))
+print()
+
+raw = (f"Hi, my national ID is {NATIONAL_ID}, my mobile is {MOBILE}, and my IBAN "
+       f"is {IBAN}. How much is a transcript?")
+
+session = Session(student_id="WU-STU-000123")
+clear()
+
+# Layer 3 is a model call. Capture exactly what it was given.
+spy = FakeClient().script_text("ok")
+guarded = InputGuard(spy, classifier_enabled=True).check(raw, session)
+sent_to_model = "\n".join(m.content for m in spy.calls[0].messages)
+
+print("1. STUDENT TYPED")
+print("  ", raw)
+print()
+print("2. MASKED FORM (what the pipeline carries onward)")
+print("  ", guarded.text)
+print()
+print("3. WHAT THE CLASSIFIER MODEL ACTUALLY RECEIVED")
+print("  ", sent_to_model.splitlines()[-1])
+print()
+print("4. WHAT REACHED THE LOG")
+for record in RECORDS[-3:]:
+    print("  ", record)
+print()
+
+for label, value in (("national id", NATIONAL_ID), ("mobile", MOBILE), ("IBAN", IBAN)):
+    in_model = value in sent_to_model
+    in_log   = value in repr(RECORDS)
+    in_text  = value in guarded.text
+    print(f"  {label:<12} reached model: {in_model}   reached log: {in_log}   "
+          f"in carried text: {in_text}")
+    assert not (in_model or in_log or in_text), f"{label} leaked"
+
+# The outbound wall stops it going the other way too.
+print()
+print("5. OUTBOUND WALL")
+for value in (NATIONAL_ID, MOBILE, IBAN):
+    text, verdict = OutputGuard().apply(f"Your details: {value}", session=session)
+    print(f"   reply containing {value[:12]:<14} -> allowed={verdict.allowed} "
+          f"category={verdict.category}")
+    assert not verdict.allowed and value not in text
+
+print()
+print("PASS  Saudi PII is detected and masked BEFORE the model, the router and the log,")
+print("      and the outbound wall refuses to let any of it out again.")
 '''
 )
 

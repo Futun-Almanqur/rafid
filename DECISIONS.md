@@ -9,7 +9,7 @@ cannot answer: what did we change our mind about?
 | [001](docs/adr/001-architecture-pattern.md) | Router-first, with exactly one bounded tool loop | accepted |
 | [002](docs/adr/002-model-and-routing.md) | Model choice is a routing table, not a winner | accepted |
 | [004](docs/adr/004-provenance.md) | The local backend is vendored, and what is borrowed is itemised | accepted |
-| [005](docs/adr/005-adapters-over-sdks.md) | Adapters speak the wire, not the vendor SDK | accepted |
+| [005](docs/adr/005-adapters-over-sdks.md) | The adapter calls the provider SDK, and only the adapter | accepted (reversed once) |
 | [006](docs/adr/006-auth-policy-is-its-own-field.md) | Authorisation is declared, never inferred from risk class | accepted |
 
 ---
@@ -74,6 +74,30 @@ sees their own confirmation number and never sees anyone else's.
 **Result.** The lookup works, the cross-student refusal still fires (test 1 in
 `tests/test_tool_safety.py`), and the protection sits where the real control is.
 Masking would have looked safer and been worse.
+
+---
+
+### Speaking the wire instead of the SDK, reversed
+
+**First decision.** Adapters would use `httpx` and not import a vendor SDK: we
+already had retries, typed models and an error taxonomy above the boundary, and
+the SDK surface churns while the wire does not.
+
+**What was wrong with it.** "No provider SDK outside the adapters" is nearly
+unfalsifiable when there is no provider SDK anywhere in the project. We shored it
+up with a negative control, which was the right instinct — but the boundary is
+only interesting if something real sits on the far side of it.
+
+**Second decision.** The OpenAI-dialect adapter now builds an `openai.OpenAI`
+client from the configured `base_url` and calls `chat.completions.create`. Retry
+and fallback stay in `ResilientClient` (`max_retries=0` on the SDK — two retry
+layers turn one 429 into six), aliases stay in config, and
+`openai.APIStatusError` is caught in the adapter and normalised to `LLMError` so
+nothing above the boundary ever catches an SDK type.
+
+**Result.** Both fault drills still pass through SDK-raised exceptions, with
+`Retry-After` honoured and the fallback hop intact. The architecture test now has
+something real to police. See ADR 005.
 
 ---
 

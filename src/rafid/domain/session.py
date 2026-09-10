@@ -30,12 +30,39 @@ log = get_logger(__name__)
 
 #: Two kinds of identifier, treated differently on purpose.
 #:
-#: PII identifies a PERSON. It is masked inbound — before any model or log sees
-#: it — and it may never leave the system in a reply.
-PII_PATTERNS: dict[str, re.Pattern[str]] = {
+#: PII identifies a PERSON. It is masked inbound — before any model, any log or
+#: any router call sees it — and it may never leave the system in a reply.
+#:
+#: Two families, both masked identically:
+#:
+#: 1. **Saudi national PII.** A Saudi student will type a national ID, a mobile
+#:    number or an IBAN into a chat box without being asked to, because that is
+#:    what every other government form wants. The assistant never needs any of
+#:    them, so the safest thing it can do with them is not have them.
+#: 2. **Wadi identifiers** — the fictional ids this project issues.
+#:
+#: Order matters: the LONGEST pattern must be tried first, or the email is
+#: half-masked by the student-id rule that is a prefix of it. Python dicts keep
+#: insertion order, and mask_identifiers() relies on that.
+SAUDI_PII_PATTERNS: dict[str, re.Pattern[str]] = {
+    #: 22 characters after "SA": 2 check digits + 20 BBAN. Tried before the
+    #: mobile pattern because an IBAN contains digit runs that look like one.
+    "saudi_iban": re.compile(r"\bSA\d{22}\b"),
+    #: National ID / Iqama: 10 digits, leading 1 (citizen) or 2 (resident).
+    "saudi_national_id": re.compile(r"(?<!\d)[12]\d{9}(?!\d)"),
+    #: Mobile: +9665XXXXXXXX, 009665XXXXXXXX, or 05XXXXXXXX.
+    "saudi_mobile": re.compile(r"(?<!\d)(?:(?:\+|00)966|0)5\d{8}(?!\d)"),
+}
+
+WADI_PII_PATTERNS: dict[str, re.Pattern[str]] = {
     "email": re.compile(r"\bWU-STU-\d{6}@students\.wadi\.example\b"),
     "student_id": re.compile(r"\bWU-STU-\d{6}\b"),
 }
+
+#: Everything masked inbound and blocked outbound. Saudi patterns first: a
+#: national ID is a bare digit run and must be claimed before anything else
+#: tries to interpret it.
+PII_PATTERNS: dict[str, re.Pattern[str]] = {**SAUDI_PII_PATTERNS, **WADI_PII_PATTERNS}
 
 #: A REFERENCE identifies a CASE, not a person. It is opaque, it carries nothing
 #: about the student, and the assistant is useless without it — a student asking
@@ -53,6 +80,7 @@ REFERENCE_PATTERNS: dict[str, re.Pattern[str]] = {
 
 #: Everything the outbound wall knows how to recognise.
 WADI_IDENTIFIERS: dict[str, re.Pattern[str]] = {**PII_PATTERNS, **REFERENCE_PATTERNS}
+#: (name kept for continuity; it now spans Saudi PII too)
 
 AuthPolicy = Literal["none", "session_owner", "session_owner_fresh"]
 
@@ -270,7 +298,21 @@ def mask_identifiers(text: str, session: Session) -> str:
     return text
 
 
+def contains_pii(text: str) -> str | None:
+    """Does this text carry something that identifies a PERSON?
+
+    Distinct from contains_identifier() on purpose: a case reference is an
+    identifier but not PII, and conflating the two is what led to masking
+    references inbound and breaking the status lookup (see DECISIONS.md).
+    """
+    for kind, pattern in PII_PATTERNS.items():
+        if pattern.search(text):
+            return kind
+    return None
+
+
 def contains_identifier(text: str) -> str | None:
+    """Any Wadi or Saudi identifier, PII or case reference."""
     for kind, pattern in WADI_IDENTIFIERS.items():
         if pattern.search(text):
             return kind

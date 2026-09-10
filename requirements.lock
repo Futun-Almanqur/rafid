@@ -8,3 +8,8 @@
 # adds the rest.
 
 pyyaml==6.0.3
+
+# The provider SDK. Imported ONLY inside src/rafid/llm/ (the adapter package);
+# tests/test_architecture.py fails if that stops being true.
+openai==2.54.0
+httpx==0.28.1
