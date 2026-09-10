@@ -39,7 +39,7 @@ Engineering (هندسة تطبيقات النماذج اللغوية الكبي�
 
 **Track B — Campus services.** Wadi University (جامعة الوادي) is fictional.
 
-<a href="https://colab.research.google.com/github/⟨PENDING-U3⟩/blob/main/notebook/capstone.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+<a href="https://colab.research.google.com/github/Futun-Almanqur/rafid/blob/main/notebook/capstone.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 
 *Runs in Colab with no API key required by default, no manual clone, and no local
 installation. The setup cell below fetches the project and starts a local backend
@@ -75,14 +75,8 @@ code(
 # ── §0 setup ────────────────────────────────────────────────────────────────
 import json, os, pathlib, socket, subprocess, sys, time, urllib.request
 
-REPO_URL = "https://github.com/⟨PENDING-U3⟩"   # ← set this before running
+REPO_URL = "https://github.com/Futun-Almanqur/rafid"
 IN_COLAB = "google.colab" in sys.modules
-
-if "⟨PENDING-U3⟩" in REPO_URL:
-    raise RuntimeError(
-        "REPO_URL is not set. Put this project's GitHub URL above. "
-        "The setup cell clones it; there is nothing to run without it."
-    )
 
 # ── 1. the project: cloned by this cell, not by you ─────────────────────────
 if IN_COLAB:

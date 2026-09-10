@@ -9,47 +9,37 @@ download its BPE table there. Five minutes of your time closes it.
 ## 1 · Create the GitHub repository and push
 
 ```bash
-# from the folder containing this file
-git remote add origin https://github.com/<YOUR-USERNAME>/rafid.git
-git push -u origin main
-```
-
-If you were handed a `rafid.bundle` instead of the folder:
-
-```bash
 git clone rafid.bundle rafid
 cd rafid
-git remote set-url origin https://github.com/<YOUR-USERNAME>/rafid.git
+git remote add origin https://github.com/Futun-Almanqur/rafid.git
 git push -u origin main
 ```
+
+If you already have the folder rather than the bundle, skip the clone and start
+at `git remote add`.
 
 The repository must be **public**, or Colab cannot clone it.
 
-## 2 · Put the real URL in three places
+## 2 · Nothing to fill in
 
-Search the repo for `⟨PENDING-U3⟩` and replace every hit:
+The repository URL and the cohort dates are already set:
 
-| File | What to set |
+| Setting | Value |
 |---|---|
-| `notebook/_build_notebook.py` | `REPO_URL` and the Colab badge URL |
-| `README.md` | the cohort dates line |
+| `REPO_URL` in the setup cell | `https://github.com/Futun-Almanqur/rafid` |
+| Colab badge | points at `Futun-Almanqur/rafid`, branch `main` |
+| Cohort dates in `README.md` | 6 September 2026 – 9 September 2026 |
 
-Then rebuild the notebook and commit:
-
-```bash
-python notebook/_build_notebook.py
-git commit -am "Set the repository URL and cohort dates"
-git push
-```
-
-> Do **not** run `_build_notebook.py` again after step 4 — it rebuilds the
+> Do **not** run `notebook/_build_notebook.py` after step 4 — it rebuilds the
 > notebook without outputs, and the outputs are the evidence.
 
 ## 3 · Open it in Colab
 
 ```
-https://colab.research.google.com/github/<YOUR-USERNAME>/rafid/blob/main/notebook/capstone.ipynb
+https://colab.research.google.com/github/Futun-Almanqur/rafid/blob/main/notebook/capstone.ipynb
 ```
+
+Or click the badge at the top of the README.
 
 ## 4 · Clean runtime, then run everything
 
@@ -79,8 +69,9 @@ a real finding, not something to work around.
 
 ## 6 · Save the executed notebook
 
-**File → Save a copy in GitHub**, same path
-(`notebook/capstone.ipynb`), commit message `Phase 2: executed on Colab`.
+**File → Save a copy in GitHub** → repository `Futun-Almanqur/rafid`, branch
+`main`, path `notebook/capstone.ipynb`, commit message
+`Phase 2: executed on Colab`.
 
 Or: **File → Download → Download .ipynb** and send me the file.
 

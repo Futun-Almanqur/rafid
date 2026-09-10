@@ -4,8 +4,9 @@
 
 **Programme:** SDA-AIE-213 — Large Language Model Application Engineering
 (هندسة تطبيقات النماذج اللغوية الكبيرة), SDAIA Academy
-**Cohort dates:** ⟨PENDING-U3⟩
+**Cohort dates:** 6 September 2026 – 9 September 2026
 **SDAIA Academy on GitHub:** https://github.com/SDAIAAcademy
+**This repository:** https://github.com/Futun-Almanqur/rafid
 
 **Capstone track: B — Campus services.**
 **Extension: none selected.** An extension is only attempted if the mandatory
@@ -62,7 +63,7 @@ standing in for it.
 ### Running it locally instead
 
 ```bash
-git clone <this repository> && cd rafid
+git clone https://github.com/Futun-Almanqur/rafid.git && cd rafid
 python -m venv .venv && .venv/bin/pip install -r requirements.lock
 python scripts/run_gateway.py                 # the local backend
 .venv/bin/pytest                              # the test suite
@@ -192,5 +193,5 @@ BPE table there, so every token and cost figure is labelled accordingly. See
 
 **REAL-PROVIDER: NOT USED** — by design. The default path needs no key.
 
-Items marked `⟨PENDING-U3⟩` above must be resolved before submission; a check for
-that marker is part of the final read-through.
+The repository URL and cohort dates are set. `notebook/capstone.ipynb` opens
+directly in Colab from the badge at the top.
