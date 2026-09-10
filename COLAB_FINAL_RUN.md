@@ -56,12 +56,12 @@ is the most common way to lose Section 7.
 |---|---|
 | §0 setup | `OPENAI_API_KEY_PRESENT=False` and `ANTHROPIC_API_KEY_PRESENT=False` |
 | §0 setup | **`TOKENIZER=REAL  encoding=o200k_base`** |
-| §0 setup | a port number, a pid, `poll() = None` |
+| §0 setup | a port number, a pid, its **pgid**, `poll() = None` |
 | §0 setup | `GET /healthz` returning `ok: True` and `tokenizer: REAL` |
 | §0 setup | `GET /v1/models` listing four models incl. `wadi-onprem` |
 | §0.2 | a real `usage` block and a grounded English answer |
 | §0.3 | both languages, then `PASS both languages quote…` |
-| §0.4 | `terminated`, `port is dead`, `restarted`, then `PASS a fresh process…` |
+| §0.4 | `terminated … escalated_to_sigkill=…`, `port is dead : True · tcp_connect_succeeds = False`, `restarted … same port`, then `PASS a fresh process…` |
 
 **If `TOKENIZER=REAL` does not appear, stop.** The cell is written to raise
 rather than substitute an approximation. Send me the traceback — that failure is

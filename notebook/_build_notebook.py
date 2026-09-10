@@ -151,33 +151,22 @@ def post(path, payload, timeout=60):
         return json.loads(r.read().decode())
 
 
-def start_gateway(wait_s=90):
-    """Start the vendored gateway and block until /healthz answers."""
-    proc = subprocess.Popen(
-        [sys.executable, str(ROOT / "scripts" / "run_gateway.py")],
-        env={**os.environ, "PORT": str(PORT)},
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-    )
-    deadline = time.time() + wait_s
-    while time.time() < deadline:
-        if proc.poll() is not None:
-            raise RuntimeError("gateway exited during startup:\n" + proc.stdout.read())
-        try:
-            get("/healthz", timeout=2)
-            return proc
-        except Exception:
-            time.sleep(1)
-    proc.terminate()
-    raise RuntimeError(f"gateway did not answer /healthz within {wait_s}s")
+# Process ownership lives in the repo, not in this cell, so the lifecycle test
+# and this notebook exercise the same code. scripts/gateway_process.py explains
+# the bug it exists for: Popen.terminate() signals ONE process, and anything the
+# gateway forks keeps the listening socket. start_new_session=True puts it in its
+# own process group; shutdown signals that group and then polls the PORT.
+from scripts.gateway_process import (
+    port_is_open, start_gateway, stop_gateway, wait_until_port_closed,
+)
 
-
-GATEWAY = start_gateway()
+GATEWAY = start_gateway(PORT, root=ROOT)
 
 print()
 print("port         :", PORT)
-print("pid          :", GATEWAY.pid, "· poll() =", GATEWAY.poll(), "(None means running)")
+print("pid          :", GATEWAY.pid, "· pgid =", os.getpgid(GATEWAY.pid),
+      "(its own group — everything it forks is ours to stop)")
+print("poll()       :", GATEWAY.poll(), "(None means running)")
 print("GET /healthz :", get("/healthz"))
 print("GET /v1/models:", [m["id"] for m in get("/v1/models")["data"]])
 '''
@@ -310,40 +299,51 @@ md(
     """
 ### §0.4 · Restart proof
 
-Terminate the gateway, confirm it is gone, then start it again **with the same
-`start_gateway()` this cell's setup defined** and confirm it answers. This is what
-separates "it works" from "it happens to still be running from an earlier
-attempt".
+Terminate the gateway, confirm the **port** refuses connections, then start it
+again on that **same port** and confirm it answers. This is what separates "it
+works" from "it happens to still be running from an earlier attempt".
+
+Two things this cell will not do, because both would make it prove nothing:
+
+- **it does not restart on a different port.** The claim is that the first
+  process released *this* socket, so this socket is what has to be re-checked;
+- **it does not sleep and hope.** `wait_until_port_closed()` polls with a real
+  TCP connect until the port refuses, and the assertion below reads that.
+
+A process object reporting `returncode = -15` is not evidence the socket is gone.
+A refused connection is. The first version of this cell trusted the returncode
+and failed on a clean Colab runtime for exactly that reason.
 """
 )
 
 code(
     r'''
-GATEWAY.terminate()
-GATEWAY.wait(timeout=20)
-print("terminated   : returncode =", GATEWAY.returncode)
+result = stop_gateway(GATEWAY, PORT)
+print("terminated   : returncode =", result["returncode"],
+      "· escalated_to_sigkill =", result["escalated_to_sigkill"])
 
-try:
-    get("/healthz", timeout=2)
-    raise AssertionError("something is still answering on the port — restart proves nothing")
-except AssertionError:
-    raise
-except Exception as exc:
-    print("port is dead  :", type(exc).__name__)
+# The PORT is the authority, not the process object.
+dead = result["port_closed"] and wait_until_port_closed(PORT, timeout=5)
+print("port is dead :", dead, "· tcp_connect_succeeds =", port_is_open(PORT))
+assert dead and not port_is_open(PORT), (
+    f"port {PORT} still accepts connections after the owned process group was "
+    "terminated — the restart below would prove nothing"
+)
 
-GATEWAY = start_gateway()
-print("restarted    : pid =", GATEWAY.pid, "· poll() =", GATEWAY.poll())
+GATEWAY = start_gateway(PORT, root=ROOT)
+print("restarted    : pid =", GATEWAY.pid, "· poll() =", GATEWAY.poll(),
+      "· same port", PORT)
 print("GET /healthz :", get("/healthz"))
 
 again = ask("How much does an official academic transcript cost?")
 text = again["choices"][0]["message"]["content"]
 assert "SAR 60 per copy" in text, "the restarted gateway did not answer from the directory"
+print()
 print("PASS  a fresh process answers from the directory — no leftover state")
 '''
 )
 
 
-# ---------------------------------------------------------------------------
 md(
     """
 ### §1.1 · The provider SDK, actually called — through the adapter
