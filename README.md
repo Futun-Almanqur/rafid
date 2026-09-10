@@ -183,8 +183,12 @@ see below.
 
 ## Status, honestly
 
-**LOCAL VERIFIED** — everything above ran in this repository and its output is in
-`eval/out/`. 21 tests pass; guards, gate, harness and demo are green.
+**LOCAL VERIFIED** — the full local suite was executed successfully: 54 tests pass
+(12 architecture, 12 tool-safety, 30 Saudi-PII tests); guards, regression gate,
+golden-set harness and demo are green. The generated results are captured in
+[`EVALUATION_REPORT.md`](EVALUATION_REPORT.md) and
+[`BENCHMARKS.md`](BENCHMARKS.md). Raw `eval/out/` artefacts are reproducible and
+intentionally gitignored.
 
 **COLAB VERIFICATION PENDING** — the notebook has never been executed on Colab.
 The build environment has no access to it, and `tiktoken` could not download its
