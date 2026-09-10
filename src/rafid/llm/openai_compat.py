@@ -39,6 +39,13 @@ from rafid.llm.interfaces import (
 SDK_NAME = "openai"
 SDK_VERSION = openai.__version__
 
+#: The concrete SDK client class, exported as a VALUE rather than as an import.
+#: Anything outside this package that needs to prove which SDK is in use — the
+#: notebook's evidence cell, for one — reads this instead of importing `openai`
+#: itself. Importing the SDK to prove the SDK is confined here would be the
+#: claim disproving itself.
+SDK_CLIENT_TYPE: type = OpenAI
+
 
 class OpenAICompatClient:
     """Speaks the OpenAI chat-completions dialect, via the official SDK."""
@@ -71,6 +78,26 @@ class OpenAICompatClient:
     def sdk(self) -> OpenAI:
         """The live SDK client. Exposed for the architecture evidence cell."""
         return self._sdk
+
+    def sdk_evidence(self) -> dict:
+        """What the notebook prints to show the SDK is real, without importing it.
+
+        Everything here is read off the live client object this adapter is about
+        to call — the class it actually is, the base_url it will actually hit,
+        the retry setting that keeps reliability policy above the boundary, and
+        the alias resolution that keeps concrete model names out of callers.
+        """
+        return {
+            "sdk_name": SDK_NAME,
+            "sdk_version": SDK_VERSION,
+            "client_module": type(self._sdk).__module__,
+            "client_class": type(self._sdk).__name__,
+            "is_sdk_client_type": isinstance(self._sdk, SDK_CLIENT_TYPE),
+            "base_url": str(self._sdk.base_url),
+            "max_retries": self._sdk.max_retries,
+            "call_path": "openai.OpenAI.chat.completions.create",
+            "alias_example": f"rafid-flagship -> {self.resolve('rafid-flagship')}",
+        }
 
     def resolve(self, alias: str) -> str:
         return self._aliases.get(alias, self._aliases.get("rafid-default", alias))

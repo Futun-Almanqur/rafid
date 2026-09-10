@@ -352,43 +352,37 @@ print("PASS  a fresh process answers from the directory — no leftover state")
 # ---------------------------------------------------------------------------
 md(
     """
-### §1.1 · The provider SDK, actually called
+### §1.1 · The provider SDK, actually called — through the adapter
 
-The rubric asks for a provider SDK that is *called*, not merely declared. The
-cell below builds a client through our config, shows that the object inside the
-adapter really is `openai.OpenAI` pointed at the configured `base_url`, and then
-completes a request through it.
+The rubric asks for a provider SDK that is *called*, not merely declared.
 
-Two things stay above the boundary and are visible here:
+This cell does **not** `import openai`. That would be the claim disproving itself
+in its own evidence: the whole point is that provider SDK imports live in exactly
+one package, `src/rafid/llm/`. So the adapter exports what it knows about the live
+client it is about to call, and the cell reads that.
 
-- `max_retries=0` on the SDK. Reliability policy is `ResilientClient`'s job, and
-  two retry layers turn one 429 into six and make the drill transcript a lie.
-- the model **alias** is resolved from config, so no caller names a concrete model.
+Everything printed below is read off the real object — the class it actually is,
+the `base_url` it will actually hit, the retry setting that keeps reliability
+policy above the boundary, and the alias resolution that keeps concrete model
+names out of callers. Then the cell completes a request through it and checks the
+answer came from **our** directory.
 
-`import openai` appears in exactly one package, `src/rafid/llm/`. §1.4 proves that
-with a check that can fail.
+§1.4 proves the confinement claim with a check that can fail — including a check
+that this notebook itself imports no provider SDK.
 """
 )
 
 code(
     r'''
-import openai
-from openai import OpenAI
-
 from rafid.config import build_client, load_settings
 from rafid.llm import LLMRequest, Message
-from rafid.llm.openai_compat import SDK_NAME, SDK_VERSION
-from rafid.domain.directory import load_directory, rendered_directory
 
 settings = load_settings(gateway_base=BASE)
 client = build_client(settings, "primary")
 
-print(f"provider SDK           : {SDK_NAME} {SDK_VERSION}")
-print(f"object inside adapter  : {type(client.sdk).__module__}.{type(client.sdk).__name__}")
-print(f"isinstance(_, OpenAI)  : {isinstance(client.sdk, OpenAI)}")
-print(f"base_url (from config) : {client.sdk.base_url}")
-print(f"sdk max_retries        : {client.sdk.max_retries}  (retry lives in ResilientClient)")
-print(f"alias -> concrete model: rafid-flagship -> {client.resolve('rafid-flagship')}")
+# The adapter reports on the live SDK client. No provider SDK is imported here.
+for key, value in client.sdk_evidence().items():
+    print(f"  {key:<20} {value}")
 
 reply = client.complete(LLMRequest(
     messages=[
@@ -409,13 +403,24 @@ print(f"latency     : {reply.latency_ms:.0f} ms")
 print()
 print(reply.text)
 
-assert isinstance(client.sdk, OpenAI), "the adapter is not using the OpenAI SDK"
+evidence = client.sdk_evidence()
+assert evidence["client_module"] == "openai", "the adapter is not using the openai SDK"
+assert evidence["client_class"] == "OpenAI"
+assert evidence["is_sdk_client_type"] is True
+assert evidence["max_retries"] == 0, "SDK retry would double ResilientClient's"
 assert reply.model_id, "the SDK call returned no model id"
+assert reply.usage.input_tokens > 0, "no usage came back — nothing was really called"
 assert "SAR 60 per copy" in (reply.text or ""), "the SDK call did not reach our backend"
+
+assert "openai" not in globals() and "OpenAI" not in globals(), (
+    "this cell pulled the SDK into its own namespace"
+)
 print()
-print("PASS  a real openai.OpenAI client completed a request against the configured backend.")
+print("PASS  openai.OpenAI.chat.completions.create completed a request against the")
+print("      configured backend — proven through the adapter, without importing the SDK.")
 '''
 )
+
 
 # ---------------------------------------------------------------------------
 md(

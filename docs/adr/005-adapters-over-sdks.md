@@ -37,9 +37,29 @@ gateway ignores the key, and the SDK is happy with a placeholder.
 ## What still enforces the boundary
 
 `tests/test_architecture.py` forbids `openai` / `anthropic` imports anywhere
-outside `src/rafid/llm/`, and the check now has something real to catch. The
-negative control stays: the same check is re-run against a synthetic file
-containing `import openai`, and the test fails if it does not catch it.
+outside `src/rafid/llm/`, and the check now has something real to catch. Four
+things keep it honest:
+
+1. the **negative control** — the same check re-run against a synthetic file
+   containing `import openai`, failing if it does not catch it;
+2. `test_the_notebook_does_not_import_a_provider_sdk` — the notebook is scanned
+   too. Its evidence cell reads `client.sdk_evidence()` instead, because a
+   notebook that imports the SDK to prove the SDK is confined to the adapters is
+   the claim disproving itself;
+3. `test_switching_backend_is_config_not_code` — four separate assertions that
+   both kinds of route exist, are built through the same dialect-keyed factory,
+   resolve to different concrete models and different residencies, and differ at
+   the call site by a route name alone. An earlier version of this test ended in
+   `or True` and could not fail; that is recorded here because it was exactly the
+   mistake the rest of the file exists to prevent;
+4. `test_no_business_logic_branches_on_a_provider_name` — keeping the import
+   inside the adapter while hard-coding `if route == "openai"` in a handler turns
+   the next provider swap back into a rewrite.
+
+`SDK_CLIENT_TYPE` and `sdk_evidence()` are the adapter's exported evidence: the
+live client's class, its configured `base_url`, its `max_retries`, and the alias
+it resolves — read off the object, published as values, so nothing outside the
+package needs the import.
 
 ## Consequences
 

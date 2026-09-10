@@ -178,17 +178,127 @@ def test_every_adapter_satisfies_the_llmclient_protocol():
 
 
 def test_switching_backend_is_config_not_code():
-    """The commercial and open-weight routes differ by configuration alone."""
-    from rafid.config import build_client, load_settings
+    """Commercial and open-weight are two backends reached by one code path.
+
+    The previous version of this test ended in `or True`, which made it incapable
+    of failing — the exact "presence is not effect" mistake the rest of this file
+    exists to catch, committed by the file itself. Replaced with four claims that
+    can each fail on their own.
+    """
+    from rafid.config import ADAPTERS, build_client, load_settings
+    from rafid.llm import LLMClient
 
     settings = load_settings()
     commercial = settings.routes_of_kind("commercial")
     open_weight = settings.routes_of_kind("open_weight")
-    assert commercial and open_weight, "both a commercial and an open-weight route must exist"
 
-    a = build_client(settings, commercial[0])
-    b = build_client(settings, open_weight[0])
-    assert type(a) is type(b) or a.dialect == b.dialect or True  # adapters may differ by dialect
+    # 1. both kinds of backend are configured
+    assert commercial, "no commercial route is configured"
+    assert open_weight, "no open-weight route is configured — there is only one backend"
+
+    commercial_route = settings.route(commercial[0])
+    open_weight_route = settings.route(open_weight[0])
+
+    # 2. both are built through the SAME factory, and the factory chooses the
+    #    adapter from the route's declared dialect — never from a provider name
+    a = build_client(settings, commercial_route.name)
+    b = build_client(settings, open_weight_route.name)
+    assert isinstance(a, LLMClient) and isinstance(b, LLMClient)
+    assert type(a) is ADAPTERS[commercial_route.dialect]
+    assert type(b) is ADAPTERS[open_weight_route.dialect]
+
+    # 3. they are genuinely different backends: different concrete model, and the
+    #    open-weight one is pinned to different residency
     assert a.resolve("rafid-flagship") != b.resolve("rafid-flagship"), (
-        "the two routes resolve to the same concrete model — that is one backend, not two"
+        "both routes resolve to the same concrete model — that is one backend, not two"
+    )
+    assert open_weight_route.residency != commercial_route.residency, (
+        "the open-weight route is not pinned to a different residency, so the "
+        "data-classification argument for having it does not hold"
+    )
+
+    # 4. switching is CONFIGURATION: the only thing that differs at the call site
+    #    is a route name, and the route's own fields carry everything else
+    for route_name in (commercial_route.name, open_weight_route.name):
+        client = build_client(settings, route_name)
+        assert client.route == route_name
+        assert client.base_url.rstrip("/") == settings.route(route_name).base_url.rstrip("/")
+
+
+def test_no_business_logic_branches_on_a_provider_name():
+    """A named provider inside an `if` is config leaking into code.
+
+    This is the flip side of the SDK-import rule: you can keep the import inside
+    the adapter and still hard-code `if route == "openai"` in a handler, which
+    turns the next provider swap back into a rewrite.
+    """
+    from rafid.config import ADAPTERS
+
+    provider_words = set(PROVIDER_SDKS) | {"gpt", "claude", "vllm"}
+    offenders: list[str] = []
+    for path in python_files(SRC):
+        if ADAPTER_DIR in path.parents or path.name == "config.py":
+            continue  # the adapters and the factory are where dialects may be named
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.If, ast.IfExp)):
+                continue
+            test_src = ast.dump(node.test).lower()
+            for word in provider_words:
+                if f"'{word}'" in test_src or f'"{word}"' in test_src:
+                    offenders.append(f"{path.name}:{node.lineno} branches on {word!r}")
+    assert offenders == [], (
+        "provider names belong in configuration, not in a branch:\n  " + "\n  ".join(offenders)
+    )
+    assert set(ADAPTERS) == {"openai", "anthropic"}, (
+        "the dialect->adapter table is the ONE place a dialect name maps to a class"
+    )
+
+
+def test_the_config_not_code_check_can_actually_fail():
+    """Negative control for the branching check."""
+    with tempfile.TemporaryDirectory() as tmp:
+        bad = Path(tmp) / "branchy.py"
+        bad.write_text('if route == "openai":\n    pass\n', encoding="utf-8")
+        tree = ast.parse(bad.read_text(encoding="utf-8"))
+        found = [
+            n for n in ast.walk(tree)
+            if isinstance(n, ast.If) and "'openai'" in ast.dump(n.test).lower()
+        ]
+        assert found, "the provider-branch check failed to catch a hard-coded provider name"
+
+
+# ---------------------------------------------------------------------------
+# 5. The notebook must not import a provider SDK either
+# ---------------------------------------------------------------------------
+
+
+def test_the_notebook_does_not_import_a_provider_sdk():
+    """The evidence cell proves the SDK through the adapter, not by importing it.
+
+    A notebook that does `import openai` to show the SDK is confined to the
+    adapters is the claim disproving itself in its own evidence.
+    """
+    import json
+
+    notebook = ROOT / "notebook" / "capstone.ipynb"
+    if not notebook.exists():  # pragma: no cover - the notebook is committed
+        pytest.skip("notebook not present")
+
+    cells = json.loads(notebook.read_text(encoding="utf-8"))["cells"]
+    offenders: list[str] = []
+    for index, cell in enumerate(cells):
+        if cell["cell_type"] != "code":
+            continue
+        source = "".join(cell["source"])
+        for line_no, line in enumerate(source.splitlines(), start=1):
+            stripped = line.strip()
+            if not stripped.startswith(("import ", "from ")):
+                continue
+            for sdk in PROVIDER_SDKS:
+                if stripped.startswith((f"import {sdk}", f"from {sdk}")):
+                    offenders.append(f"cell {index} line {line_no}: {stripped}")
+    assert offenders == [], (
+        "the notebook imports a provider SDK, which undermines the very claim its "
+        "evidence cell is making:\n  " + "\n  ".join(offenders)
     )
